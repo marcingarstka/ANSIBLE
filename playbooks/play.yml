@@ -1,6 +1,7 @@
 ---
-- hosts: [srv01]
+#- hosts: [srv01]
 #- hosts: [dc11]
+- hosts: localhost
   gather_facts: no
 
   roles:
@@ -14,7 +15,7 @@
 #    - FILE_touch_win
 #    - FILE_remove_win
 #    - FILE_get_version
-    - FILE_find_win
+#    - FILE_find_win
 #    - FOLDER_create_win
 #    - FOLDER_remove_win
 #    - COMMAND_win
@@ -33,3 +34,4 @@
 #    - FEATURE_remove_win
 #    - NET35_add_win
 #    - NET35_remove_win
+    - GITHUB
