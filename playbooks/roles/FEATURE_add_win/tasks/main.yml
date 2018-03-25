@@ -1,0 +1,13 @@
+---
+- name: Install Role/Feature
+  win_feature:
+    name: Telnet-client
+    state: present
+    include_sub_features: true
+    include_management_tools: true
+    source: c:\\ISO\sources\sxs
+  register: install_state
+
+- name: Reboot server if required
+  win_reboot:
+  when: install_state.reboot_required

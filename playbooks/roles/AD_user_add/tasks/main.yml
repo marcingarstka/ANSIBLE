@@ -1,0 +1,12 @@
+---
+- name: Create user account
+  win_domain_user:
+    name: "{{ myUsername }}"
+    firstname: TOMASZ
+    surname: DANIEL
+    password: P@ssw0rd
+    path: ou=Users,ou=Management,dc=lab,dc=local
+    upn: tdaniel@lab.local
+    state: present
+    groups:
+      - Remote Desktop Users

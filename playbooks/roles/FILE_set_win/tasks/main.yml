@@ -1,0 +1,5 @@
+---
+- name: Create (Set) file on a remote machine
+  win_copy:
+    dest: c:\Temp\myNewFile.log
+    content: "Marcin Garstka"

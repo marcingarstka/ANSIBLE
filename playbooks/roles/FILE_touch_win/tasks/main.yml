@@ -1,0 +1,5 @@
+---
+- name: Create (empty) file on a remote machine
+  win_file:
+    path: c:\Temp\File.log
+    state: touch

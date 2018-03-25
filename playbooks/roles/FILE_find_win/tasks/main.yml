@@ -1,0 +1,11 @@
+---
+- name: Find files
+  win_find:
+    paths: c:\ISO
+    hidden: true
+    age: 1d
+  register: file_list
+
+- name: Show files
+  debug: msg="{{ file_list }}"
+    

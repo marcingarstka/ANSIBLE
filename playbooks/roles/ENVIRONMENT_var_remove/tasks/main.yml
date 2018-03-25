@@ -1,0 +1,6 @@
+---
+- name: Remove environment variable from the system
+  win_environment:
+    state: absent
+    name: WINDOWS_CRYPTO
+    level: machine

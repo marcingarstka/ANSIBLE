@@ -1,0 +1,19 @@
+---
+- name: Get custom facts
+  setup: fact_path='c:\\Facts'
+  register: myfacts
+
+- name: Show all facts
+  debug: msg="{{ myfacts }}"
+
+- name: Show how many updates
+  debug: msg="{{ ansible_getmyupdates.PendingUpdates }}"
+
+- name: Show updates
+  debug: msg="{{ ansible_getmyupdates.Updates }}"
+
+- name: Show oldest update date
+  debug: msg="{{ ansible_getmyupdates.OldestUpdate }}"
+
+- name: Show OS
+  debug: msg="{{ ansible_facts.os }}"

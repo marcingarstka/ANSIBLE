@@ -1,0 +1,12 @@
+---
+- name: Uninstall Role/Feature
+  win_feature:
+    name: Telnet-client
+    state: absent
+    include_sub_features: true
+    include_management_tools: true
+  register: uninstall_state
+
+- name: Reboot server if required
+  win_reboot:
+  when: uninstall_state.reboot_required

@@ -1,0 +1,16 @@
+---
+- name: Rename host already in the workgroup
+  win_domain_membership:
+    workgroup_name: WORKGROUP
+    hostname: SRV01
+    domain_admin_user: administrator
+    domain_admin_password: P@ssw0rd
+    state: workgroup
+  register: workgroup_state
+
+- name: Show workgroup join result
+  debug: msg="{{ workgroup_state }}"
+
+- name: Reboot server if required
+  win_reboot:
+    when: workgroup_state.reboot_required

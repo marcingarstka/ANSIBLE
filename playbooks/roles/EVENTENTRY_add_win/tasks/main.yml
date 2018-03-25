@@ -1,0 +1,8 @@
+---
+- name: Add Event Log entry
+  win_eventlog_entry:
+    log: MyNewLog
+    source: NewLogSource1
+    event_id: 4401
+    message: This is test message. MG.
+    entry_type: information

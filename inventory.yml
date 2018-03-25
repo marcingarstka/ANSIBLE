@@ -1,0 +1,4 @@
+[wintel]
+dc11            ansible_host=dc11.lab.local
+srv01           ansible_host=192.168.0.205
+win             ansible_host=192.168.0.205

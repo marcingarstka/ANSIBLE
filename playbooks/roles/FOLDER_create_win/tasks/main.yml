@@ -1,0 +1,5 @@
+---
+- name: Create directory structure on a remote machine
+  win_file:
+    path: c:\Temp\Folder1\Folder11
+    state: directory

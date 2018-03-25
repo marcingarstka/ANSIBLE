@@ -1,0 +1,6 @@
+---
+- name: Copy a single file
+  win_copy:
+    src: files/filename1.txt
+    dest: c:\Temp\filename0.txt
+#    dest: c:\Temp\

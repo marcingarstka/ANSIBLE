@@ -1,0 +1,35 @@
+---
+- hosts: [srv01]
+#- hosts: [dc11]
+  gather_facts: no
+
+  roles:
+#    - AD_group_add
+#    - DNS_settings_add
+#    - COPY_file_win
+#    - COPY_folder_win
+#    - COPY_file_remote_win
+#    - COPY_folder_remote_win
+#    - FILE_set_win
+#    - FILE_touch_win
+#    - FILE_remove_win
+#    - FILE_get_version
+    - FILE_find_win
+#    - FOLDER_create_win
+#    - FOLDER_remove_win
+#    - COMMAND_win
+#    - AD_join_win
+#    - AD_rename_host_win
+#    - WORKGROUP_join_win
+#    - WORKGROUP_rename_host_win
+#    - AD_user_add
+#    - AD_user_remove
+#    - ENVIRONMENT_var_set
+#    - ENVIRONMENT_var_remove
+#    - FACTS_win
+#    - EVENTLOG_add_win
+#    - EVENTENTRY_add_win
+#    - FEATURE_add_win
+#    - FEATURE_remove_win
+#    - NET35_add_win
+#    - NET35_remove_win

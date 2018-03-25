@@ -1,0 +1,5 @@
+---
+- name: Remove user account
+  win_domain_user:
+    name: "TOMASZ DANIEL"
+    state: absent

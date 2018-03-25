@@ -1,0 +1,6 @@
+---
+- name: Copy a single file on a remote machine
+  win_copy:
+    src: c:\windows\system32\drivers\etc\Hosts
+    dest: c:\Temp\Hosts.txt
+    remote_src: true

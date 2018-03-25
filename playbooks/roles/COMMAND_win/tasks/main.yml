@@ -1,0 +1,16 @@
+---
+- name: Run a command on windows machine
+  win_command: whoami
+  register: whoami_out
+
+- name: Show results RC
+  debug: msg="{{ whoami_out.rc }}"
+
+- name: Show results STDOUT
+  debug: msg="{{ whoami_out.stdout }}"
+
+- name: Show results STDOUT_LINES
+  debug: msg="{{ whoami_out.stdout_lines }}"
+
+- name: Show results CMD
+  debug: msg="{{ whoami_out.cmd }}"

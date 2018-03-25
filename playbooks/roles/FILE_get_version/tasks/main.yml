@@ -1,0 +1,8 @@
+---
+- name: Get file version
+  win_file_version:
+    path: c:\Windows\System32\cmd.exe
+  register: file_ver
+
+- name: Show file version
+  debug: msg="{{ file_ver.win_file_version.product_version }}"

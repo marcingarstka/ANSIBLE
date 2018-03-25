@@ -1,0 +1,16 @@
+---
+- name: Join Active Directory domain
+  win_domain_membership:
+    dns_domain_name: lab.local
+    domain_admin_user: administrator@lab.local
+    domain_admin_password: P@ssw0rd
+    domain_ou_path: "OU=Servers,OU=Management,DC=lab,DC=local"
+    state: domain
+  register: domain_state
+
+- name: Show domain join result
+  debug: msg="{{ domain_state }}"
+
+- name: Reboot server if required
+  win_reboot:
+    when: domain_state.reboot_required

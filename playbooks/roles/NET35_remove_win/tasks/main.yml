@@ -1,0 +1,11 @@
+---
+- name: Uninstall .NET Framework 3.5
+  win_feature:
+    name: NET-framework-features
+    state: absent
+    include_sub_features: true
+  register: uninstall_state
+
+- name: Reboot server if required
+  win_reboot:
+  when: uninstall_state.reboot_required

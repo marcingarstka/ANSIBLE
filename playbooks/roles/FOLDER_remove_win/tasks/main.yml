@@ -1,0 +1,5 @@
+---
+- name: Delete directory structure and all files
+  win_file:
+    path: c:\Temp
+    state: absent

@@ -1,0 +1,9 @@
+ansible_user: administrator
+ansible_password: P@ssw0rd
+ansible_port: 5985
+ansible_connection: winrm
+
+myHostname: SRV11
+dns1: 10.208.0.201
+dns2: 10.208.0.211
+

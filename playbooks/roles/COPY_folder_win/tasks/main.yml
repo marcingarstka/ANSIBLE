@@ -1,0 +1,7 @@
+---
+- name: Copy folder
+  win_copy:
+    src: files/Folder1
+    dest: c:\Temp
+#    src: files/Folder1/
+#    dest: c:\Temp

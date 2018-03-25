@@ -1,0 +1,10 @@
+---
+- name: Add Event Log
+  win_eventlog:
+    name: MyNewLog
+    maximum_size: 4000MB
+    overflow_action: OverwriteOlder
+    sources:
+      - NewLogSource1
+      - NewLogSource2
+    state: present

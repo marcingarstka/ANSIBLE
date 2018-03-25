@@ -1,0 +1,11 @@
+---
+- name: Set environment variable on the system
+  win_environment:
+    state: present
+    name: WINDOWS_CRYPTO
+    value: Marcin Garstka
+    level: machine
+  register: env_result
+
+- name: Show environment variable
+  debug: msg="{{ env_result }}"

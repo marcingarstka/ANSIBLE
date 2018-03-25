@@ -1,0 +1,6 @@
+---
+- name: Copy folder on a remote machine
+  win_copy:
+    src: c:\Windows\system32\drivers\etc
+    dest: c:\Temp
+    remote_src: true

@@ -1,0 +1,12 @@
+---
+- name: Install .NET Framework 3.5
+  win_feature:
+    name: NET-Framework-Features
+    state: present
+    include_sub_features: true
+    source: c:\\ISO\sources\sxs
+  register: install_state
+
+- name: Reboot server if required
+  win_reboot:
+  when: install_state.reboot_required

@@ -1,0 +1,7 @@
+---
+- win_dns_client:
+    adapter_names: "Ethernet0"
+    ipv4_addresses:
+    - "{{ dns1 }}"
+    - "{{ dns2 }}"
+    log_path: c:\dns_log.txt
