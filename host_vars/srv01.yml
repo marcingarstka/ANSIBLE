@@ -1,9 +1,7 @@
-ansible_user: administrator
-ansible_password: P@ssw0rd
 ansible_port: 5985
 ansible_connection: winrm
+#ansible_winrm_transport: kerberos
+#ansible_winrm_cert_validation: ignore
 
-myHostname: SRV11
-dns1: 10.208.0.201
-dns2: 10.208.0.211
-
+myHostname: DC11
+myUsername: "TOMASZ DANIEL"

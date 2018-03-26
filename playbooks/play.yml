@@ -1,7 +1,7 @@
 ---
-#- hosts: [srv01]
+- hosts: [srv01]
 #- hosts: [dc11]
-- hosts: localhost
+#- hosts: localhost
   gather_facts: no
 
   roles:
@@ -25,7 +25,7 @@
 #    - WORKGROUP_rename_host_win
 #    - AD_user_add
 #    - AD_user_remove
-#    - ENVIRONMENT_var_set
+    - ENVIRONMENT_var_set
 #    - ENVIRONMENT_var_remove
 #    - FACTS_win
 #    - EVENTLOG_add_win
@@ -34,4 +34,4 @@
 #    - FEATURE_remove_win
 #    - NET35_add_win
 #    - NET35_remove_win
-    - GITHUB
+#    - GITHUB
