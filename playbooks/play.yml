@@ -25,7 +25,7 @@
 #    - WORKGROUP_rename_host_win
 #    - AD_user_add
 #    - AD_user_remove
-    - ENVIRONMENT_var_set
+#    - ENVIRONMENT_var_set
 #    - ENVIRONMENT_var_remove
 #    - FACTS_win
 #    - EVENTLOG_add_win
@@ -35,3 +35,4 @@
 #    - NET35_add_win
 #    - NET35_remove_win
 #    - GITHUB
+    - ENABLE_secure_winrm_win

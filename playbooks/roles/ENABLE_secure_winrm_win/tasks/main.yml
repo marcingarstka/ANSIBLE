@@ -1,0 +1,27 @@
+---
+- name: Create temp directory on a remote machine
+  win_file:
+    path: c:\Temp\
+    state: directory
+
+- name: Copy enableSecureWINRM powershell script
+  win_copy:
+    src: files/enableSecureWINRM.ps1
+    dest: c:\Temp\
+
+- name: Remove existing WINRM HTTPS listener
+  win_shell: "winrm delete winrm/config/Listener?Address=*+Transport=HTTPS"
+  register: ws_out
+  ignore_errors: yes
+
+- name: Run enableSecureWINRM script on a remote machine
+  win_shell: c:\Temp\enableSecureWINRM.ps1
+  register: ps_out
+
+- name: Show results
+  debug: msg="{{ ps_out.rc }}"
+
+- name: Delete temp directory on a remote machine
+  win_file:
+    path: c:\Temp
+    state: absent
