@@ -1,7 +1,7 @@
 ---
-- hosts: [srv01]
+#- hosts: [srv01]
 #- hosts: [dc11]
-#- hosts: localhost
+- hosts: localhost
   gather_facts: no
 
   roles:
@@ -34,5 +34,5 @@
 #    - FEATURE_remove_win
 #    - NET35_add_win
 #    - NET35_remove_win
-#    - GITHUB
-    - ENABLE_secure_winrm_win
+    - GITHUB
+#    - ENABLE_secure_winrm_win
