@@ -5,7 +5,7 @@ ansible_port: 22
 #ansible_connection: winrm
 ansible_connection: ssh
 #ansible_connection: kerberos
-ansible_winrm_server_cert_validation: ignore
+#ansible_winrm_server_cert_validation: ignore
 #ansible_winrm_server_cert_validation: true
 
 #### SERVER PARAMETERS
