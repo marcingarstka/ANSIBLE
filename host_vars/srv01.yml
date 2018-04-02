@@ -1,7 +1,16 @@
-ansible_port: 5986
+#### CONNECTION PARAMETERS
+ansible_port: 5985
+#ansible_port: 5986
+#ansible_port: 22
 ansible_connection: winrm
-#ansible_winrm_transport: kerberos
+#ansible_connection: ssh
+#ansible_connection: kerberos
 ansible_winrm_server_cert_validation: ignore
+#ansible_winrm_server_cert_validation: true
 
-myHostname: DC11
-myUsername: "TOMASZ DANIEL"
+#### SERVER PARAMETERS
+CompHost: app01
+CompDomain: lab.local
+CompOU:
+os: LINUX
+#os: WINDOWS 

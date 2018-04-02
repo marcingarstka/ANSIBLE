@@ -1,8 +1,9 @@
-ansible_user: administrator@LAB.LOCAL
+#### CONNECTION PARAMETERS
 ansible_port: 5985
+#ansible_port: 5986
+#ansible_port: 22
 ansible_connection: winrm
-#ansible_winrm_transport: kerberos
-#ansible_winrm_cert_validation: ignore
-
-myHostname: DC11
-myUsername: "TOMASZ DANIEL"
+#ansible_connection: ssh
+#ansible_connection: kerberos
+ansible_winrm_server_cert_validation: ignore
+#ansible_winrm_server_cert_validation: true

@@ -1,3 +1,11 @@
-[wintel]
+[ad]
 dc11            ansible_host=dc11.lab.local
+
+[vcenter]
+vcs01           ansible_host=vcs01.lab.local
+
+[wintel]
 srv01           ansible_host=srv01.lab.local
+
+[linux]
+app01           ansible_host=app01.lab.local

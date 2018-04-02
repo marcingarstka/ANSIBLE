@@ -1,12 +1,11 @@
 ---
-- name: ensure the group WINDOWS_ADMIN_{{ myHostname }} exists
+- name: ensure AD group exists
   win_domain_group:
-    name: WINDOWS_ADMIN_DC11
+    name: "{{ os }}_ADMIN_{{ CompHost }}"
     scope: global
     path: OU=Groups,OU=Management,DC=lab,DC=local
-    description: WINDOWS ADMINISTRATIVE ACCESS ON DC11
-    attributes:
-      mail: admins@lab.local
+    description: "{{ os }} ADMINISTRATIVE ACCESS ON {{ CompHost }}"
     managed_by: mgarstka
     protect: yes
     state: present
+  delegate_to: dc11
