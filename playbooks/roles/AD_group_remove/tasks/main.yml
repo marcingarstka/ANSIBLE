@@ -1,0 +1,7 @@
+---
+- name: Remove AD group {{ os }}_ADMIN_{{ CompHost }}
+  win_domain_group:
+    name: "{{ os }}_ADMIN_{{ CompHost }}"
+    ignore_protection: yes
+    state: absent
+  delegate_to: dc11

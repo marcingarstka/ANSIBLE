@@ -3,7 +3,7 @@
   gather_facts: no
 
   roles:
-    - GITHUB
+#    - GITHUB
 
 - hosts: [app01]
   gather_facts: no
@@ -11,3 +11,7 @@
   roles:
     - AD_group_add
     - IMAGE_deploy_lnx
+    - IMAGE_extend_cpu
+    - IMAGE_extend_memory
+    - IMAGE_resize_disk
+    - IMAGE_reconfigure_network

@@ -1,7 +1,0 @@
----
-- name: Clone repository from GITHUB
-  git:
-    repo: git@github.com:marcingarstka/ANSIBLE.git
-    version: master
-    dest: /data/ANSIBLE/
-    accept_hostkey: yes

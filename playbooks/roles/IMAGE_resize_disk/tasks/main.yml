@@ -1,0 +1,42 @@
+---
+- name: Include vCenter variables
+  include_vars: ../group_vars/vcenter.yml
+
+- name: Resize disks on {{ CompHost }} image
+  vmware_guest:
+    hostname: vcs01.lab.local
+    username: "{{ vcenter_user }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: no
+    folder: "{{ vfolder }}"
+    datacenter: "{{ vdatacenter }}"
+    esxi_hostname: "{{ esxhost }}"
+    name: "{{ CompHost }}"
+    disk:
+    - size_gb: "{{ vdisk1 }}"
+      datastore: "{{ vdatastore1 }}"
+    wait_for_ip_address: yes
+  delegate_to: localhost
+  when:
+    - disksTotal == 1
+
+
+- name: Resize disks on {{ CompHost }} image
+  vmware_guest:
+    hostname: vcs01.lab.local
+    username: "{{ vcenter_user }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: no
+    folder: "{{ vfolder }}"
+    datacenter: "{{ vdatacenter }}"
+    esxi_hostname: "{{ esxhost }}"
+    name: "{{ CompHost }}"
+    disk:
+    - size_gb: "{{ vdisk1 }}"
+      datastore: "{{ vdatastore1 }}"
+    - size_gb: "{{ vdisk2 }}"
+      datastore: "{{ vdatastore2 }}"
+    wait_for_ip_address: yes
+  delegate_to: localhost
+  when:
+  - disksTotal > 1

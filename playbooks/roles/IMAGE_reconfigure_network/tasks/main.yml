@@ -2,7 +2,7 @@
 - name: Include vCenter variables
   include_vars: ../group_vars/vcenter.yml
 
-- name: Create {{ CompHost }} from Template
+- name: Reconfigure network on {{ CompHost }} image
   vmware_guest:
     hostname: vcs01.lab.local
     username: "{{ vcenter_user }}"
@@ -12,19 +12,6 @@
     datacenter: "{{ vdatacenter }}"
     esxi_hostname: "{{ esxhost }}"
     name: "{{ CompHost }}"
-    state: poweredon
-    guest_id: "{{ vguestos }}"
-    annotation: "{{ vdescription }}"
-    template: "{{ vtemplate }}"
-    disk:
-    - size_gb: "{{ vdisk1 }}"
-      datastore: "{{ vdatastore1 }}"
-    hardware:
-      num_cpus: "{{ vcpu }}"
-      hotadd_cpu: "{{ vhotaddcpu }}"
-      hotremove_cpu: "{{ vhotremovecpu }}"
-      memory_mb: "{{ vmemory }}"
-      hotadd_memory: "{{ vhotaddmemory }}"
     networks:
     - name: "{{ vnetwork1 }}"
       ip: "{{ vip1 }}"
@@ -33,10 +20,12 @@
       domain: "{{ CompDomain }}"
       type: "{{ iftype1 }}"
       dns: "{{ vdnsservers }}"
-    customization:
-      hostname: "{{ CompHost }}"
-      domain: "{{ CompDomain }}"
-      dns_servers: "{{ vdnsservers }}"
-      timezone: 100
+    - name: "{{ vnetwork2 }}"
+      ip: "{{ vip2 }}"
+      netmask: "{{ vmask2 }}"
+      gateway: "{{ vgateway2 }}"
+      type: "{{ iftype2 }}"
     wait_for_ip_address: yes
   delegate_to: localhost
+  when: 
+    - nicsTotal == 2
