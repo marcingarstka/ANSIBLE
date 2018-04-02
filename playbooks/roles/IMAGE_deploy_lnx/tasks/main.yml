@@ -13,6 +13,7 @@
     esxi_hostname: "{{ esxhost }}"
     name: "{{ CompHost }}"
     state: poweredon
+    annotation: "{{ vdescription }}"
     template: "{{ vtemplate }}"
     networks:
     - name: "{{ vnetwork1 }}"
