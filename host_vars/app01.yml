@@ -17,6 +17,7 @@ os: LINUX
 
 #### VCENTER PARAMETERS
 vdatacenter: WARSAW
+vfolder: /vm/Linux
 esxhost: esx01.lab.local
 vtemplate: IMGCentos
 

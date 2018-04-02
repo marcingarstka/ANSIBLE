@@ -9,6 +9,7 @@
     password: "{{ vcenter_password }}"
     validate_certs: no
     datacenter: "{{ vdatacenter }}"
+    folder: "{{ vfolder }}"
     esxi_hostname: "{{ esxhost }}"
     name: "{{ CompHost }}"
     template: "{{ vtemplate }}"
