@@ -16,7 +16,7 @@ os: LINUX
 
 
 #### VCENTER PARAMETERS
-vdatacenter: "WARSAW"
+vdatacenter: WARSAW
 esxhost: esx01.lab.local
 vtemplate: IMGCentos
 
