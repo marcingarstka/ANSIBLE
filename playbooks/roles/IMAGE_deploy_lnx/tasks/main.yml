@@ -1,6 +1,6 @@
 ---
 - name: Include vCenter variables
-  include_vars: vcenter.yml
+  include_vars: ../group_vars/vcenter.yml
 
 - name: Create {{ CompHost }} from Template
   vmware_guest:
