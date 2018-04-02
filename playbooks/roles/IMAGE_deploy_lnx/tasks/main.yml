@@ -13,6 +13,7 @@
     esxi_hostname: "{{ esxhost }}"
     name: "{{ CompHost }}"
     state: poweredon
+    guest_id: "{{ vguestos }}"
     annotation: "{{ vdescription }}"
     template: "{{ vtemplate }}"
     networks:
