@@ -1,4 +1,7 @@
 ---
+- name: Include vCenter variables
+  include_vars: vcenter.yml
+
 - name: Create {{ CompHost }} from Template
   vmware_guest:
     hostname: vcs01.lab.local
