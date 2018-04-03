@@ -23,18 +23,29 @@ vfolder: /vm/Linux
 vdescription: "APPLICATION SERVER #1"
 esxhost: esx01.lab.local
 vtemplate: tempcentos
-
-vdisk1: 25
-vdatastore1: IT
-vdisk2: 15
-vdatastore2: IT
-disksTotal: 2
-
-vcpu: 2
+vcpu: 1
 vhotaddcpu: yes
 vhotremovecpu: yes
 vmemory: 1024
 vhotaddmemory: yes
+
+
+#### BASE DISK PARAMETERS
+vdisk1: 20
+vdatastore1: VM
+
+#### ADDITIONAL DISK PARAMETERS
+vdisk2: 15
+vdatastore2: VM
+vDiskDevice2: sdb
+vDiskDeviceIndex2: 1
+vVolumeGroup2: datavg
+vLogicalVolume2: datalv
+vLogicalVolume2size: 12g
+vLogicalVolume2MountPoint: /data
+
+#### TOTAL DISKS
+disksTotal: 2
 
 #### DNS ADDRESSING
 vdnsservers:
@@ -49,11 +60,12 @@ vip1: 192.168.0.206
 vmask1: 255.255.255.0
 vgateway1: 192.168.0.1
 
-vnetwork2: "VM Network2"
-iftype2: static
+#vnetwork2: "VM Network2"
+#iftype2: static
 #iftype2: dhcp
-vip2: 192.168.0.207
-vmask2: 255.255.255.0
-vgateway2: 
+#vip2: 192.168.0.207
+#vmask2: 255.255.255.0
+#vgateway2: 
 
-nicsTotal: 2
+#### TOTAL NICS
+nicsTotal: 1

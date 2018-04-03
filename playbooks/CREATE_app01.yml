@@ -14,4 +14,5 @@
     - IMAGE_extend_cpu
     - IMAGE_extend_memory
     - IMAGE_resize_disk
+    - OS_create_partition_lnx
     - IMAGE_reconfigure_network
