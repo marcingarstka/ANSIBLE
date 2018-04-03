@@ -1,0 +1,7 @@
+---
+- name: Update {{ CompHost }} host_vars
+  lineinfile:
+    path: /data/ANSIBLE/host_vars/{{ inventory_hostname }}.yml
+    regexp: '^MustBeRemoved'
+    line: 'MustBeRemoved: no'
+  delegate_to: localhost

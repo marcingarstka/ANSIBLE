@@ -16,3 +16,4 @@
     - IMAGE_resize_disk
     - OS_create_partition_lnx
     - IMAGE_reconfigure_network
+    - UPDATE_hostvars

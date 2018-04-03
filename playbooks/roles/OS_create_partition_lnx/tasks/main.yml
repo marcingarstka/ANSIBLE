@@ -4,6 +4,8 @@
   become: true
   when:
     - disksTotal > 1
+  register: scsi_result
+  changed_when: "scsi_result.rc == 12"
 
 - name: Create partition for LVM
   parted:
