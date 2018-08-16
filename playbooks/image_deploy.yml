@@ -14,6 +14,6 @@
     - IMAGE_extend_cpu
     - IMAGE_extend_memory
     - IMAGE_resize_disk
-    - OS_create_partition_lnx
+    - LNX_create_partition
     - IMAGE_reconfigure_network
     - UPDATE_hostvars
