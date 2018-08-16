@@ -1,3 +1,5 @@
+localhost       ansible_host=localhost
+
 [ad]
 dc11            ansible_host=dc11.lab.local
 
