@@ -11,8 +11,10 @@ ansible_connection: ssh
 #### SERVER PARAMETERS
 CompHost: APP01
 CompDomain: lab.local
+
 os: LINUX
 #os: WINDOWS 
+
 #vguestos: rhel7_64Guest
 vguestos: centos64Guest
 #vguestos: windows8Server64Guest
@@ -28,7 +30,6 @@ vhotaddcpu: yes
 vhotremovecpu: yes
 vmemory: 1024
 vhotaddmemory: yes
-
 
 #### BASE DISK PARAMETERS
 vdisk1: 20
