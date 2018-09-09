@@ -10,7 +10,7 @@
     validate_certs: no
     folder: "{{ vfolder }}"
     datacenter: "{{ vdatacenter }}"
-    esxi_hostname: "{{ esx01.lab.local }}"
+    esxi_hostname: "{{ esxhost }}"
     name: "{{ CompHost }}"
     state: poweredon
     guest_id: "{{ vguestos }}"
