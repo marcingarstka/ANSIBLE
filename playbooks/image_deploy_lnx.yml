@@ -3,7 +3,7 @@
   gather_facts: no
 
   roles:
-    - GITHUB
+#    - GITHUB
     - AD_group_add
     - IMAGE_deploy_lnx
     - IMAGE_extend_cpu
