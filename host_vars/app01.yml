@@ -33,11 +33,11 @@ vhotaddmemory: yes
 
 #### BASE DISK PARAMETERS
 vdisk1: 20
-vdatastore1: IT
+vdatastore1: VM
 
 #### ADDITIONAL DISK PARAMETERS
 vdisk2: 15
-vdatastore2: IT
+vdatastore2: VM
 vDiskDevice2: sdb
 vDiskDeviceIndex2: 1
 vVolumeGroup2: datavg
