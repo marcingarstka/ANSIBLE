@@ -4,13 +4,13 @@
 
 - name: Create {{ CompHost }} from Template
   vmware_guest:
-    hostname: vcs01.lab.local
+    hostname: 192.168.0.203
     username: "{{ vcenter_user }}"
     password: "{{ vcenter_password }}"
     validate_certs: no
     folder: "{{ vfolder }}"
     datacenter: "{{ vdatacenter }}"
-    esxi_hostname: "{{ esxhost }}"
+    #esxi_hostname: "{{ esxhost }}"
     name: "{{ CompHost }}"
     state: poweredon
     guest_id: "{{ vguestos }}"
