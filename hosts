@@ -1,5 +1,3 @@
-ans01           ansible_host=192.168.0.202    ansible_connection=local
-
 [ad]
 dc11            ansible_host=dc11.lab.local
 

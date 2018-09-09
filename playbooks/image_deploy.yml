@@ -1,6 +1,7 @@
 ---
 - hosts: all
   gather_facts: no
+  connection: local
 
   roles:
     - GITHUB
