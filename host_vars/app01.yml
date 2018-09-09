@@ -23,7 +23,7 @@ vguestos: centos64Guest
 vdatacenter: WARSAW
 vfolder: /vm/Linux
 vdescription: "APPLICATION SERVER #1"
-esxhost: vcs01.lab.local
+esxhost: esx01.lab.local
 vtemplate: tempcentos
 vcpu: 1
 vhotaddcpu: yes
