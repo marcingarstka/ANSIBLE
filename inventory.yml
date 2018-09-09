@@ -1,4 +1,4 @@
-[localhost]
+localhost       ansible_host=ans01.lab.local
 ans01           ansible_host=ans01.lab.local
 
 [ad]
