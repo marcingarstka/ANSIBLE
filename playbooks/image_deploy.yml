@@ -1,5 +1,5 @@
 ---
-- hosts: [ans01]
+- hosts: all
   gather_facts: no
 
   roles:
