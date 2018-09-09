@@ -11,4 +11,4 @@
   roles:
     - AD_group_remove
     - IMAGE_poweroff
-    - IMAGE_remove_lnx
+    - IMAGE_remove

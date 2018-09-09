@@ -11,4 +11,3 @@
     - IMAGE_resize_disk
     - LNX_create_partition
     - IMAGE_reconfigure_network
-    - ANSIBLE_update_hostvars
