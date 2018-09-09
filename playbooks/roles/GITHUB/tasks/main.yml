@@ -5,3 +5,4 @@
     version: master
     dest: /data/ANSIBLE/
     accept_hostkey: yes
+  delegate: localhost
