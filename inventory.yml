@@ -1,5 +1,5 @@
 [all]
-localhost       ansible_connection=local
+localhost       ansible_connection=local        ansible_python_interpreter="/usr/bin/env python"
 ans01           ansible_host=ans01.lab.local
 
 [ad]
