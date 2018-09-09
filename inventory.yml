@@ -1,5 +1,5 @@
 [all]
-localhost       ansible_host=ans01.lab.local
+localhost       ansible_connection=local
 ans01           ansible_host=ans01.lab.local
 
 [ad]
