@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: ans01
   gather_facts: no
 
   roles:
