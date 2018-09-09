@@ -4,7 +4,7 @@
 
 - name: Create {{ CompHost }} from Template
   vmware_guest:
-    hostname: 192.168.0.203
+    hostname: vcs01.lab.local
     username: "{{ vcenter_user }}"
     password: "{{ vcenter_password }}"
     validate_certs: no
