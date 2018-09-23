@@ -8,4 +8,4 @@ vcs01           ansible_host=vcs01.lab.local
 srv01           ansible_host=srv01.lab.local
 
 [linux]
-app01           ansible_host=192.168.0.206
+app01           ansible_host=192.168.0.207
