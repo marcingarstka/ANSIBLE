@@ -58,7 +58,7 @@ vdnsservers:
 vnetwork1: "VM Network"
 iftype1: static
 #iftype1: dhcp
-vip1: 192.168.0.206
+vip1: 192.168.0.207
 vmask1: 255.255.255.0
 vgateway1: 192.168.0.1
 
