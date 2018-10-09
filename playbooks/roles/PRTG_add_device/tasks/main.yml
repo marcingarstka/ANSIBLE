@@ -1,0 +1,19 @@
+---
+- name: Create PRTG directory 
+  win_file: 
+    path: c:\ANSIBLE\PRTG 
+    state: directory 
+  delegate_to: term01
+
+- name: Copy PRTG script file
+  win_copy: 
+    src: templates/PRTG/PRTGaddDevice.ps1 
+    dest: c:\ANSIBLE\PRTG\
+  delegate_to: term01
+
+- name: Add new device {{ CompHost }} to PRTG
+  win_shell: c:\ANSIBLE\PRTG\PRTGaddDevice.ps1 -CompHost {{ CompHost }} -CompIP {{ vIP }} -PRTGGroupID {{ PRTGGroupID }} -os {{ os }}
+  register: prtg_result
+  delegate_to: term01
+
+- debug: msg="{{ prtg_result.stdout_lines }}"
