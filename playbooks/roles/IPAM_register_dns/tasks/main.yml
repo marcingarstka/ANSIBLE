@@ -1,0 +1,32 @@
+---
+- name: Create AD directory 
+  win_file: 
+    path: c:\ANSIBLE\LAB 
+    state: directory 
+  delegate_to: term01
+
+- name: Copy DNS script file
+  win_copy: 
+    src: templates/LAB/AddHostname.ps1 
+    dest: c:\ANSIBLE\LAB\
+  delegate_to: term01
+
+- name: Copy ComputerAccount script file
+  win_copy: 
+    src: templates/LAB/AddADComputerAccount.ps1 
+    dest: c:\ANSIBLE\LAB\
+  delegate_to: term01
+
+- name: Register DNS A Record for {{ CompDomain }}
+  win_shell: c:\ANSIBLE\LAB\AddHostname.ps1 -CompHost {{ CompHost }} -CompIP {{ vIP }} -DNSServer {{ DNSServer }} -DNSDomain {{ CompDomain }}
+  register: dns_result
+  delegate_to: term01
+
+- debug: msg="{{ dns_result.stdout_lines }}"
+
+- name: Prestage Active Directory computer account inside {{ AD_OU }}
+  win_shell:  c:\ANSIBLE\LAB\AddADComputerAccount.ps1 -CompHost {{ CompHost }} -OU "{{ AD_OU }}" -Role "{{ Role }}"
+  register: ad_computer
+  delegate_to: term01
+
+- debug: msg={{ ad_computer }}

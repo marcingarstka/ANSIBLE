@@ -1,0 +1,20 @@
+---
+- name: Create AD directory 
+  win_file: 
+    path: c:\ANSIBLE\LAB 
+    state: directory 
+  delegate_to: term01
+
+- name: Copy DNS script file
+  win_copy: 
+    src: templates/LAB/AddDNS.ps1 
+    dest: c:\ANSIBLE\LAB\
+  delegate_to: term01
+
+- name: Add DNS A Record
+  win_shell: c:\ANSIBLE\LAB\AddDNS.ps1 -Recordname "{{ item.Recordname }}" -Recordip {{ item.Recordip }} -DNSServer {{ DNSServer }} -DNSzone {{ item.DNSzone }}
+  with_items: "{{ DNSlist }}"
+  register: dnsadd_result
+  delegate_to: term01
+
+- debug: msg={{ dnsadd_result }}
