@@ -1,0 +1,7 @@
+---
+- name: Clone repository from BITBUCKET
+  git:
+    repo: ssh://git@bitbucket.dev.mille.pl/sdd/sdd.code.git
+    version: master
+    dest: /data/ANSIBLE/SDD.CODE
+    accept_hostkey: yes

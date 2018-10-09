@@ -1,0 +1,19 @@
+---
+- name: Create FUDO directory
+  win_file:
+    path: c:\ANSIBLE\FUDO
+    state: directory
+  delegate_to: term01
+
+- name: Copy FUDO script file
+  win_copy:
+    src: templates/FUDO/FUDOaddServer.ps1
+    dest: c:\ANSIBLE\FUDO\
+  delegate_to: term01
+
+- name: Add new server {{ CompHost }} to FUDO
+  win_shell: c:\ANSIBLE\FUDO\FUDOaddServer.ps1 -CompHost {{ CompHost }} -CompIP {{ vIP }} -FUDOGroup {{ FUDOGroup }}
+  register: fudo_result
+  delegate_to: term01
+
+- debug: msg="{{ fudo_result.stdout_lines }}"

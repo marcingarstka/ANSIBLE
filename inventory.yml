@@ -4,6 +4,9 @@ dc11            ansible_host=dc11.lab.local
 [vcenter]
 vcs01           ansible_host=vcs01.lab.local
 
+[terminal]
+term01          ansible_host=term01.lab.local
+
 [wintel]
 srv01           ansible_host=srv01.lab.local
 
