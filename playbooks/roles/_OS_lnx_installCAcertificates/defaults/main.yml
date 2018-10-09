@@ -1,9 +1,9 @@
 ---
 
-artifactCertRepositoryName: BM_Certificates
+artifactCertRepositoryName: LAB_Certificates
 artifactCertRepositoryGroupPath: "{{ env }}"
 artifactCertRepositoryPath: "{{ artifactRepositoryURL }}/{{ artifactCertRepositoryName }}/{{ artifactCertRepositoryGroupPath }}"
 checkRepoCertificate: no
 
 caCertificateFileName: CAchain.pem
-webSenseCertificateFileName: BM_Websense_CA.pem
+webSenseCertificateFileName: LAB_Websense_CA.pem

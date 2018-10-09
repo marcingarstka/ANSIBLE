@@ -37,7 +37,7 @@
   authorized_key:
     user: ansibleadmlocal
     state: present
-    key: https://artifactrepo.mille.pl/nexus/repository/BM_Certificates/ssh_keys/int/ssh_ansibleadmlocal_key.pub
+    key: https://artifactrepo.lab.local/nexus/repository/LAB_Certificates/ssh_keys/int/ssh_ansibleadmlocal_key.pub
   become: true
 
 - name: Validate cerificate

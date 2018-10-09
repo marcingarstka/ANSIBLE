@@ -1,15 +1,15 @@
 ---
 - name: Copy McAfee agent to server
   copy:
-    src: /data/SDD/install_files/mcafee/install.sh
-    dest: /home/sddadmin/install.sh
-    owner: sddadmin
-    group: sddadmin
+    src: /data/install_files/mcafee/install.sh
+    dest: /home/admin/install.sh
+    owner: admin
+    group: admin
     mode: 0744
     force: no
 
 - name: Install McAfee agent
-  command: sh /home/sddadmin/install.sh -i creates=/etc/init.d/ma
+  command: sh /home/admin/install.sh -i creates=/etc/init.d/ma
   become: true
 
 

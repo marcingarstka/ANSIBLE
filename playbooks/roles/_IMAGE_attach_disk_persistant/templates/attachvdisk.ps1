@@ -1,4 +1,11 @@
-#Example: .\AttachVDISK.ps1 -CompHost SEVMTSTHDD01 -vstore DS_DEV05_APIGW -vdisk "SEVMINTAPI01.vmdk" -vdiskname2 "Hard disk 2"
+<#
+.EXAMPLE
+.\AttachVDISK.ps1 -CompHost SERVER01 -vstore DS_DEV05_APIGW -vdisk "SERVER01.vmdk" -vdiskname2 "Hard disk 2" 
+
+.SYNOPSIS
+.\AttachVDISK.ps1 -CompHost SERVER01 -vstore DS_DEV05_APIGW -vdisk "SERVER01.vmdk" -vdiskname2 "Hard disk 2"
+#>
+
 Param(
   [string]$CompHost,
   [string]$vstore,
@@ -10,7 +17,7 @@ Param(
 . "C:\Program Files (x86)\VMware\Infrastructure\PowerCLI\Scripts\Initialize-PowerCLIEnvironment.ps1"
 
 #Connect to vCenter
-Connect-VIServer -Server seplmovcs02.millecloud.local -User MilleCreator@vsphere.local -Password !QAZxsw2 | out-null
+Connect-VIServer -Server vcs01.lab.local -User Creator@vsphere.local -Password xxxx | out-null
 
 #Attach disk if missing
 $diskcount = get-harddisk -VM $CompHost | where {$_.Filename -eq "[$vstore] $CompHost/$vdisk"} 
@@ -33,4 +40,4 @@ else {
 }
 
 #Disconnect from vCenter
-Disconnect-VIServer -Server seplmovcs02.millecloud.local -confirm:$false
+Disconnect-VIServer -Server vcs01.lab..local -confirm:$false
