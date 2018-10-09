@@ -1,0 +1,41 @@
+---
+- name: Include AD variables 
+  include_vars: ../group_vars/ad.yml
+
+- name: Install AD/Kerberos packages
+  yum: state=latest name={{  item  }}
+  with_items:
+    - sssd
+    - realmd
+    - oddjob
+    - oddjob-mkhomedir
+    - adcli
+    - samba-common
+    - samba-common-tools
+    - krb5-workstation
+    - openldap-clients
+    - policycoreutils-python
+    - libselinux-python
+    - python-pip
+  become: true
+
+#- name: Install pip packages
+#  pip: name={{ item }} state=present
+#  with_items:
+#    - kerberos
+#    - request_kerberos
+#  become: true
+
+- name: Check if machine is bound
+  shell: /bin/bash -c "realm list | grep sssd"
+  register: realmd_bound
+  changed_when: false
+  ignore_errors: true
+
+- name: Join system to AD and put the computer object in the Linux OU
+  expect:
+    command: /bin/bash -c "/usr/sbin/realm join --user=millecreator@pl.bcpcorp.net
+    responses:
+      Password for *: "{{ mcrpass }}"
+      when: realmd_bound|failed
+  become: true

@@ -1,0 +1,13 @@
+---
+- name: Replace hosts file
+  template:
+    src: templates/hosts.j2
+    dest: /etc/hosts
+  become: true
+
+- name: Setup names in /etc/hosts file
+  lineinfile:
+    path: /etc/hosts
+    line: '{{ vIP }}   {{ item }} {{ CompHost }}'
+  with_items: "{{ DNSAlias }}"
+  become: true

@@ -1,0 +1,19 @@
+---
+- name: Final reboot system 
+  vmware_guest:
+    hostname: "{{ vcenter }}" 
+    username: "{{ vcenter_user }}" 
+    password: "{{ vcenter_password }}" 
+    validate_certs: no
+    #esxi_hostname: "{{ esx_host }}"
+    #folder: "{{ vdatacenter }}/vm/{{ vfolder }}"
+    #datacenter: "{{ vdatacenter }}" 
+    name: "{{ CompHost }}" 
+    state: restarted
+    guest_id: "{{ vguestos }}" 
+    #annotation: "{{ Role }}" 
+    #template: "{{ vtemplate }}" 
+    wait_for_ip_address: yes
+  delegate_to: localhost
+  when: 
+    - nicsTotal == 2

@@ -1,0 +1,19 @@
+---
+- name: Configure permissions for AD
+  template:
+    src: templates/sudoers-hostname-checker.j2
+    dest: /usr/local/sbin/sudoers-hostname-checker
+  become: true
+
+- name: Run sudoers-hostname-checker script
+  command: sh /usr/local/sbin/sudoers-hostname-checker
+  become: true
+
+- name: Add sudoers-hostname-checker to cron
+  cron:
+    name: "sudoers-hostname-checker"
+    minute: "0"
+    hour: "1"
+    user: root
+    job: "/usr/local/sbin/sudoers-hostname-checker"
+  become: true

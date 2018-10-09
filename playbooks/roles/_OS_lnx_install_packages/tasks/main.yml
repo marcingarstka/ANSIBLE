@@ -1,0 +1,51 @@
+---
+# - name: Install package htop
+#   yum:
+#     name: htop
+#     state: latest
+#   ignore_errors: yes
+#   become: true
+
+# - name: Install package telnet
+#   yum:
+#     name: telnet
+#     state: latest
+#   ignore_errors: yes
+#   become: true
+
+# - name: Install package mc
+#   yum:
+#     name: mc
+#     state: latest
+#   ignore_errors: yes
+#   become: true
+
+# - name: Install package mlocate
+#   yum:
+#     name: mlocate
+#     state: latest
+#   ignore_errors: yes
+#   become: true
+
+
+- name: Install list of packages 
+  package: name={{item}} state=installed 
+  with_items: 
+      - htop
+      - dstat
+      - ncdu
+      - telnet
+      - jq
+      - screen
+      - vim
+      - nc
+      - yamllint
+      - bind-utils
+      #- multitail
+      - mc
+      #SDD
+      - mlocate
+      - lsof
+  #when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'RedHat'
+  ignore_errors: yes
+  become: true

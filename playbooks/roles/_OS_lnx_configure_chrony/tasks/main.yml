@@ -1,0 +1,30 @@
+---
+- name: Install chrony
+  yum:
+    name: chrony
+    state: latest
+  ignore_errors: yes
+  become: true
+
+- name: Configure chrony
+  template:
+    src: templates/chrony.j2
+    dest: /etc/chrony.conf
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+
+- name: Stop ntpd
+  systemd:
+    name: ntpd
+    state: stopped
+    enabled: no
+  become: true
+
+- name: Enable and start chrony
+  systemd:
+    name: chronyd
+    state: restarted
+    enabled: yes
+  become: true

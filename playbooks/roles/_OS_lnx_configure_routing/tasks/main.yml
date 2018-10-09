@@ -1,0 +1,28 @@
+- name: Create routing file
+  template:
+    src: templates/route-ens192.j2
+    dest: /etc/sysconfig/network-scripts/route-ens192
+  become: true
+  when: 
+    - nicsTotal == 2
+
+- name: Add routing entries
+  lineinfile:
+    path: /etc/sysconfig/network-scripts/route-ens192
+    line: '{{ item }} via {{ vgateway2 }} dev ens192'
+  with_items: "{{ Routing }}"
+  become: true
+  when: 
+    - nicsTotal == 2
+
+- name: Bring up routing
+  command: /etc/sysconfig/network-scripts/ifup-routes ens192
+  become: true
+  when: 
+    - nicsTotal == 2
+
+- name: Restart network service
+  command: systemctl restart network
+  become: true
+  when: 
+    - nicsTotal == 2

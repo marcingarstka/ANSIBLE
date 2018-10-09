@@ -1,0 +1,46 @@
+---
+- name: Create group for service
+  group:
+    name: "{{ LcUser }}"
+    state: present
+  become: true
+
+- name: Create local user "{{ LcUser }}"
+  user:
+    name: "{{ LcUser }}"
+    password: "{{ LcPassword }}"
+    groups: wheel
+    comment: "{{ LcComment }}"
+    update_password: on_create
+  become: true
+
+- name: Add sudo configuration for ansibleadmlocal user
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^"{{ LcUser }}"'
+    line: '"{{ LcUser }}" ALL=(ALL) NOPASSWD:ALL'
+    validate: visudo -cf %s
+  become: true
+
+- name: Set never expiring password for local user "{{ LcUser }}"
+  shell: chage -I -1 -m 0 -M 99999 -E -1 "{{ LcUser }}"
+  become: true
+
+# - name: Add public key for ansibleadmlocal user
+#   authorized_key:
+#     user: "{{ LcUser }}"
+#     state: present
+#     key: "{{ ssh_pub_key }}"
+#   become: true
+- name: Add public key for ansibleadmlocal user
+  authorized_key:
+    user: ansibleadmlocal
+    state: present
+    key: https://artifactrepo.mille.pl/nexus/repository/BM_Certificates/ssh_keys/int/ssh_ansibleadmlocal_key.pub
+  become: true
+
+- name: Validate cerificate
+  shell: update-ca-trust extract
+  register: update-ca-check
+  become: true

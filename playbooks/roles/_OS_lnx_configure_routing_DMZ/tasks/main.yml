@@ -1,0 +1,22 @@
+- name: Create routing file for DMZ PUB
+  template:
+    src: templates/route-ens160.j2
+    dest: /etc/sysconfig/network-scripts/route-ens160
+  become: true
+  when: 
+    - nicsTotal == 2
+
+- name: Add routing entries to DMZ PUB
+  lineinfile:
+    path: /etc/sysconfig/network-scripts/route-ens160
+    line: '{{ item }} via {{ vgateway1 }} dev ens160'
+  with_items: "{{ Routing_DMZ }}"
+  become: true
+  when: 
+    - nicsTotal == 2
+
+- name: Bring up routing DMZ PUB
+  command: /etc/sysconfig/network-scripts/ifup-routes ens160
+  become: true
+  when: 
+    - nicsTotal == 2

@@ -1,0 +1,80 @@
+--- 
+- name: Include vCenter variables 
+  include_vars: ../group_vars/vcenter.yml 
+  
+- name: Install additional network card {{ CompHost }} image 
+  vmware_guest: 
+    hostname: "{{ vcenter }}"
+    username: "{{ vcenter_user }}" 
+    password: "{{ vcenter_password }}" 
+    validate_certs: no 
+    folder: "{{ vdatacenter }}/vm/{{ vfolder }}" 
+    datacenter: "{{ vdatacenter }}"  
+    name: "{{ CompHost }}" 
+    networks: 
+      - name: "{{ vnetwork1 }}" 
+        ip: "{{ vIP }}" 
+        netmask: "{{ vmask1 }}" 
+        gateway: "{{ vgateway1 }}" 
+        domain: "{{ CompDomain }}" 
+        type: "{{ iftype1 }}" 
+        dns_servers:
+          - "{{ DNSServer }}"
+          - "{{ DNSServer2 }}" 
+  wait_for_ip_address: yes 
+  delegate_to: localhost 
+  when: 
+    - nicsTotal == 1
+
+- name: Install additional network card {{ CompHost }} image 
+  vmware_guest: 
+    hostname: "{{ vcenter }}"
+    username: "{{ vcenter_user }}" 
+    password: "{{ vcenter_password }}" 
+    validate_certs: no 
+    folder: "{{ vdatacenter }}/vm/{{ vfolder }}" 
+    datacenter: "{{ vdatacenter }}"  
+    name: "{{ CompHost }}" 
+    networks: 
+      - name: "{{ vnetwork1 }}" 
+        ip: "{{ vIP }}" 
+        netmask: "{{ vmask1 }}" 
+        gateway: "{{ vgateway1 }}" 
+        domain: "{{ CompDomain }}" 
+        type: "{{ iftype1 }}" 
+        dns_servers:
+          - "{{ DNSServer }}"
+          - "{{ DNSServer2 }}"
+      - name: "{{ vnetwork2 }}"
+        ip: "{{ vIP2 }}"
+        netmask: "{{ vmask2 }}"
+        type: "{{ iftype2 }}"
+  wait_for_ip_address: yes 
+  delegate_to: localhost 
+  when: 
+    - nicsTotal == 2
+
+- name: Configure second IP address
+  template:
+    src: templates/ifcfg-ens192.j2
+    dest: /etc/sysconfig/network-scripts/ifcfg-ens192
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+  when: 
+    - nicsTotal == 2
+
+- name: Stop network interface
+  command: /etc/sysconfig/network-scripts/ifdown ens192
+  become: true
+  ignore_errors: yes 
+  when: 
+    - nicsTotal == 2
+
+- name: Start network interface
+  command: /etc/sysconfig/network-scripts/ifup ens192
+  become: true
+  ignore_errors: yes 
+  when: 
+    - nicsTotal == 2

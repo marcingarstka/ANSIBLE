@@ -1,0 +1,8 @@
+---
+
+- name: update trusted certificate list
+  shell: update-ca-trust extract
+  register: update-ca-check
+  become: true
+
+- debug: msg="{{ update-ca-check }}"

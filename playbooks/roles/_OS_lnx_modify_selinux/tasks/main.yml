@@ -1,0 +1,53 @@
+#Use this role if some service (for example nginx) need to listen on different than standard port 
+#In this case role will add priviledges for http port to listen on port 82/TCP
+- name: Modify SELINUX to add port for specify service
+  shell: |
+         semanage port -a -t redis_port_t -p tcp 6000
+         semanage port -a -t redis_port_t -p tcp 6001
+         semanage port -a -t redis_port_t -p tcp 6002
+         semanage port -a -t redis_port_t -p tcp 6003
+         semanage port -a -t redis_port_t -p tcp 6004
+         semanage port -a -t redis_port_t -p tcp 6008
+         semanage port -a -t redis_port_t -p tcp 6009
+         semanage port -a -t redis_port_t -p tcp 6012
+         semanage port -a -t redis_port_t -p tcp 6013
+         semanage port -a -t redis_port_t -p tcp 6014
+         semanage port -a -t redis_port_t -p tcp 6015
+         semanage port -a -t redis_port_t -p tcp 6016
+         semanage port -a -t redis_port_t -p tcp 6017
+         semanage port -a -t redis_port_t -p tcp 6018
+         semanage port -a -t redis_port_t -p tcp 6019
+         semanage port -a -t redis_port_t -p tcp 6020
+         semanage port -a -t redis_port_t -p tcp 6021
+         semanage port -a -t redis_port_t -p tcp 6022
+         semanage port -a -t redis_port_t -p tcp 6030
+         semanage port -a -t redis_port_t -p tcp 6031
+         semanage port -a -t redis_port_t -p tcp 6032
+         semanage port -a -t redis_port_t -p tcp 6033
+         semanage port -a -t redis_port_t -p tcp 6050
+         semanage port -a -t redis_port_t -p tcp 6051
+         semanage port -a -t redis_port_t -p tcp 6052
+         semanage port -a -t redis_port_t -p tcp 6100
+         semanage port -a -t redis_port_t -p tcp 6101
+         semanage port -a -t redis_port_t -p tcp 6200
+         semanage port -a -t redis_port_t -p tcp 6201
+         semanage port -a -t redis_port_t -p tcp 6202
+         semanage port -a -t redis_port_t -p tcp 6203
+         semanage port -a -t redis_port_t -p tcp 6204
+         semanage port -a -t redis_port_t -p tcp 6375
+         semanage port -a -t redis_port_t -p tcp 6381
+         semanage port -a -t redis_port_t -p tcp 6382
+         semanage port -a -t redis_port_t -p tcp 6385
+         semanage port -a -t redis_port_t -p tcp 26375
+  ignore_errors: True
+  become: true
+
+
+   # semanage port -a -t http_port_t -p tcp 82
+          # semanage port -a -t http_port_t -p tcp 83
+          # semanage port -a -t http_port_t -p tcp 7501
+          # semanage port -a -t http_port_t -p tcp 7502
+          # semanage port -a -t http_port_t -p tcp 8086
+          # ML - port 161/udp jest wykorzystywany przez SNMP, co powoduje
+          # problemy ze startem uslugi snmpd na serwerach NGINX
+          # semanage port -a -t http_port_t -p udp 161

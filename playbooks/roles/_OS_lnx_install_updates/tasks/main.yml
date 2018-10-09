@@ -1,0 +1,79 @@
+---
+- name: Upgrade all packages
+  yum:
+    name: '*'
+# RL enablerepo - not use other packages
+#    disablerepo: '*'
+#    enablerepo: updates
+    security: yes
+    state: latest
+    update_cache: yes
+  become: true
+  register: patch_summary
+
+- name: Debug summary
+  debug:
+    msg: "{{ patch_summary }}"
+
+- name: Run update checker
+  command: /opt/update-checker/update-checker.sh
+  become: true
+
+# - name: Clear yum.repos.d from external repo entries BEFORE update
+#   shell: rm -rf /etc/yum.repos.d/CentOS-*
+#   become: true
+#   warn: false
+
+# - name: Refresh repository list BEFORE update
+#   shell: yum repolist
+#   become: true
+#   warn: false
+
+# - name: Clean YUM cahce
+#   shell: yum clean all
+#   become: true
+#   warn: false
+
+# - name: Test if all packages were updated
+#   shell: yum -y update
+#   become: true
+#   warn: false
+#   register: update_check
+#   when: 
+#     - vdiskname2firsttime == false
+
+# - name: Updates list test from shell
+#   debug:
+#     msg: "{{ update_check }}"
+
+# - name: Clear yum.repos.d from external repo entries AFTER update
+#   shell: rm -rf /etc/yum.repos.d/CentOS-*
+#   warn: false
+#   become: true
+
+# - name: Refresh repository list AFTER update
+#   shell: yum repolist
+#   warn: false
+#   become: true
+
+# #ML - test of automated service restart after update
+# - name: Restart services that need restart after update
+#   shell: for s in $(needs-restarting -s | awk -F"." '{print $1}); do "systemctl restart $s"; done
+#   become: true
+#   register: services_restart
+
+# - name: Following services was restarted
+#   debug:
+#     msg: "{{ services_restart }}"
+
+- name: Check if server needs to restart
+  shell: needs-restarting -r
+  become: true
+  register: check_and_inform
+
+  #Check and scedule reboot to 11PM
+  #needs-restarting -r || shutdown -r 23:00 "rebooting at 11:00 P.M."
+
+- name: Server restart check
+  debug:
+    msg: "{{ check_and_inform }}"

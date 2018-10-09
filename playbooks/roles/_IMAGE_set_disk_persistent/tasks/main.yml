@@ -1,0 +1,61 @@
+---
+- name: Include vCenter variables 
+  include_vars: ../group_vars/vcenter.yml 
+
+- name: Copy vsphere script file
+  win_copy: 
+    src: templates/setPersistentMode.ps1 
+    dest: c:\ANSIBLE\
+  delegate_to: seplmovcs02
+  when: 
+    - vdiskname2firsttime == true
+  
+- name: Shutdown {{ CompHost }} image 
+  vmware_guest: 
+    hostname: "{{ vcenter }}" 
+    username: "{{ vcenter_user }}" 
+    password: "{{ vcenter_password }}" 
+    validate_certs: no 
+    name: "{{ CompHost }}" 
+    state: shutdownguest
+  delegate_to: localhost 
+  ignore_errors: yes
+  when: 
+    - vdiskname2firsttime == true
+
+- name: Wait for {{ CompHost }} to go down
+  wait_for: timeout=60
+  delegate_to: localhost
+  when: 
+    - vdiskname2firsttime == true
+
+- name: Set virtual disk of {{ CompHost }} as persistent
+  win_shell: c:\ANSIBLE\setPersistentMode.ps1 -CompHost {{ CompHost }} -vdiskname2 "{{ vdiskname2 }}"
+  register: set_disk_result
+  delegate_to: seplmovcs02
+  when: 
+    - vdiskname2firsttime == true
+
+- debug: msg="{{ set_disk_result.stdout_lines }}"
+  when: 
+    - vdiskname2firsttime == true
+
+- name: Bring up {{ CompHost }} image 
+  vmware_guest: 
+    hostname: "{{ vcenter }}" 
+    username: "{{ vcenter_user }}" 
+    password: "{{ vcenter_password }}" 
+    validate_certs: no 
+    name: "{{ CompHost }}" 
+    state: poweredon
+  wait_for_ip_address: true
+  delegate_to: localhost 
+  ignore_errors: yes
+  when: 
+    - vdiskname2firsttime == true
+
+- name: Wait for {{ CompHost }} to go up
+  wait_for: timeout=60
+  delegate_to: localhost
+  when: 
+    - vdiskname2firsttime == true

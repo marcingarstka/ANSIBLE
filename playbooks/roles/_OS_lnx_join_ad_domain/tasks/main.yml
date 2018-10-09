@@ -1,0 +1,8 @@
+---
+- name: Include AD variables 
+  include_vars: ../group_vars/ad.yml
+
+- name: JOIN ACTIVE DIRECTORY DOMAIN
+  shell: "yes {{ mcrpass }} | realm join --user={{ mcruser }} --computer-ou=\"OU={{ AD_OU }}\" {{ CompDomain }}"
+  ignore_errors: true
+  become: true

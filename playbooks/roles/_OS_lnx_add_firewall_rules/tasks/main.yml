@@ -1,0 +1,15 @@
+---
+- name: Add firewall ports
+  firewalld:
+    port: '{{ item }}'
+    permanent: true
+    state: enabled
+  with_items: "{{ FirewallPorts }}"
+  become: true
+
+- name: Restart firewalld service on centos
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: firewalld
+  become: true

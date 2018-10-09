@@ -1,0 +1,68 @@
+#!/bin/bash
+
+#############################################################
+# author                : Piotr Molenda
+# email                 : piotr.molenda@bankmillennium.pl
+# version               : 1.0
+# created               : 2017-07-14
+# description           : This script is designed to create/recreate /etc/sudoers.d/sudoers file,
+#                         which is used for setting sudo priviledges for  Active Directory users.
+#                         It contains 2 groups:
+#                         - linux_root_sdd (for SDD team)
+#                         - linux_root_$hostname (for sudo permissions based on hostname)
+#                         Script should be putted in root's crontab to update sudoers file once a day:
+#                         0 1 * * * /usr/local/sbin/sudoers-hostname-checker
+#############################################################
+
+
+# Check if sudoers file exist, if not - create with defaults
+
+# Path to AD sudoers groups
+SUDOGROUPS=/etc/sudoers.d/sudoers
+
+if [[ ! -f $SUDOGROUPS ]]; then
+  touch $SUDOGROUPS
+  cat <<EOF >> $SUDOGROUPS
+%linux_root_sdd ALL=(ALL)       NOPASSWD:ALL
+%linux_root_newlinuximage ALL=(ALL)       ALL
+EOF
+fi
+
+# Check sudoers file, if there is %linux_root_sdd group - if not, add it.
+CHECKSDD=$(grep root_sdd $SUDOGROUPS | awk '{print $1}' | cut -d% -f2)
+if [[ -z "$CHECKSDD" ]]; then
+  echo "%linux_root_sdd ALL=(ALL)       NOPASSWD:ALL" >> $SUDOGROUPS
+fi
+
+# Check sudoers file, if there is something else than %linux_root_sdd group.
+# Variables to compare:
+# Group name from sudoers file
+SUDOERSHOST=$(grep -v root_sdd $SUDOGROUPS | awk '{print $1}' | cut -d% -f2)
+
+# Group name based on hostname
+REALHOST="linux_root_"$(cat /etc/hostname | tr '[:upper:]' '[:lower:]')
+
+# Variable for check, if there is more than one line in $SUDOERSHOST variable
+LINES='
+'
+case $SUDOERSHOST in
+# In case there is more than one entry instead of linux_root_sdd - delete all and add linux_root_$hostname:
+  *"$LINES"*)
+    for diff_hostnames in $SUDOERSHOST
+      do
+        sed -i '/'$diff_hostnames'/d' $SUDOGROUPS
+      done
+  echo "%$REALHOST ALL=(ALL)       ALL" >> $SUDOGROUPS
+  ;;
+# If there are no entries instead of linux_root_sdd - add linux_root_$hostname:
+  *)
+    if [[ -z "$SUDOERSHOST" ]]; then
+      echo "%$REALHOST ALL=(ALL)       ALL" >> $SUDOGROUPS
+    else
+  # if there is one entry, different that linux_root_sdd - change it to linux_root_$hostname:
+      if [[ "$SUDOERSHOST" != "$REALHOST" ]]; then
+        sed -i 's,'"$SUDOERSHOST"','"$REALHOST"',g' $SUDOGROUPS
+      fi
+    fi
+  ;;
+esac

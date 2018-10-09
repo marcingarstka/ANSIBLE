@@ -1,0 +1,32 @@
+---
+- name: Mount /data with noatime
+  mount:
+    path: "{{ vLogicalVolume2MountPoint }}" 
+    src: /dev/{{ vVolumeGroup2 }}/{{ vLogicalVolume2 }}
+    fstype: ext4
+    opts: defaults,noatime
+    state: present
+  become: true
+  when: 
+    - disksTotal > 1
+
+- name: Re-mount data partition
+  shell: umount /dev/{{ vVolumeGroup2 }}/{{ vLogicalVolume2 }} && mount /dev/{{ vVolumeGroup2 }}/{{ vLogicalVolume2 }}
+  become: true
+  when: 
+    - disksTotal > 1
+  ignore_errors: true
+  register: remount_data_status
+
+#ML - test conditions if remount fails
+# sudo fuser -ickv /"mountpoint"
+# Where:
+# parameter k kills the offending process, 
+# while v shows in advance the process and its user
+# and i asks you for confirmation. 
+# If some process resists, then try again with fuser -ickv -9 (or more generally with -SIGNAL) that kills the most stubborn ones.
+
+- name: Data disk cannot be umount because of these processess
+  shell: fuser -icv /data
+  when: remount_data_status is failed
+  become: true

@@ -1,0 +1,31 @@
+- name: Backup private ssh-rsa key on server
+  copy:
+    src: /etc/ssh/ssh_host_rsa_key
+    dest: /etc/ssh/ssh_host_rsa_key.bak
+    remote_src: yes
+  become: true
+
+- name: Copy private ssh-rsa key to server
+  copy:
+    src: templates/ssh_host_rsa_key
+    dest: /etc/ssh/ssh_host_rsa_key
+    owner: root
+    group: ssh_keys
+    mode: 0640
+  become: true
+
+- name: Backup public ssh-rsa key on server
+  copy:
+    src: /etc/ssh/ssh_host_rsa_key.pub
+    dest: /etc/ssh/ssh_host_rsa_key.pub.bak
+    remote_src: yes
+  become: true
+
+- name: Copy public ssh-rsa key to server
+  copy:
+    src: templates/ssh_host_rsa_key.pub
+    dest: /etc/ssh/ssh_host_rsa_key.pub
+    owner: root
+    group: ssh_keys
+    mode: 0644
+  become: true

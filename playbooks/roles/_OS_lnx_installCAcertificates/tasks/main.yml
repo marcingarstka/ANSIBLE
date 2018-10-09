@@ -1,0 +1,31 @@
+---
+
+# - name: Copy root certificate for Microservices
+#   get_url:
+#     url: "{{ artifactCertRepositoryPath }}/{{ caCertificateFileName }}"
+#     dest: /etc/pki/ca-trust/source/anchors/
+#     owner: root
+#     group: root
+#     mode: 0440
+#     backup: no
+#     validate_certs: "{{ checkRepoCertificate }}"
+#   notify: 
+#   - update trusted certificate list
+
+- name: Copy root certificate for Websense (to have access to artifact repo)
+  copy:
+    src: "{{ webSenseCertificateFileName }}"
+    dest: /etc/pki/ca-trust/source/anchors/
+    owner: root
+    group: root
+    mode: 0440
+    backup: no
+  become: true
+  notify: 
+  - update trusted certificate list
+
+- name: Verify CA certificate
+  shell: update-ca-trust extract
+  register: update-ca-check
+  become: true
+  

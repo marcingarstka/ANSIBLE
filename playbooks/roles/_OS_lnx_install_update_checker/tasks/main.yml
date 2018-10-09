@@ -1,0 +1,12 @@
+---
+- name: Copy update-checker to server
+  copy:
+    src: /data/SDD/install_files/update_checker/update-checker-install.sh
+    dest: /home/sddadmin/update-checker-install.sh
+    owner: sddadmin
+    group: sddadmin
+    mode: 0744
+
+- name: Install update-checker
+  command: sh /home/sddadmin/update-checker-install.sh creates=/opt/update-checker/update-checker.sh
+  become: true
