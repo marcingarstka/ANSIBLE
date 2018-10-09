@@ -1,9 +1,9 @@
 <#
 .EXAMPLE
-./FUDOaddServer.ps1 -CompHost SEVMQUAXXX99 -CompIP 10.208.201.165 -FUDOGroup STANDALONE_SERVERS 
+./FUDOaddServer.ps1 -CompHost SERVER01 -CompIP 192.168.0.139 -FUDOGroup WINDOWS 
 
 .SYNOPSIS
-./FUDOaddServer.ps1 -CompHost SEVMQUAXXX99 -CompIP 10.208.201.165 -FUDOGroup STANDALONE_SERVERS
+./FUDOaddServer.ps1 -CompHost SERVER01 -CompIP 192.168.0.139 -FUDOGroup WINDOWS
 #>
 
 Param(
@@ -18,9 +18,9 @@ Param(
 ####Ignore self-signed certificates
 [System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
 
-$username="api"
-$password="!QAZxsw21qazXSW@"
-$bind="10.208.1.205"
+$username="xxxxxxxxx"
+$password="xxxxxxxxx"
+$bind="192.168.0.33"
 $CompHost=$CompHost.ToLower()
 
 #### LISTENERS
@@ -29,16 +29,11 @@ $CompHost=$CompHost.ToLower()
 ## BASTION_NLA: 687198065894883339
 
 #### SAFES (FUDOGroup)
-## MILLECLOUD_PLDEV_SERVERS: 687198065894883331
-## MILLECLOUD_PL_SERVERS: 687198065894883333
-## MILLECLOUD_SERVERS: 687198065894883336
-## PL_SERVERS: 687198065894883330
-## ELIFE_SERVERS: 687198065894883334
-## STANDALONE_SERVERS: 687198065894883335
-## SSH: 687198065894883342
+## WINDOWS_SERVERS: 687198065894883331
+## LINUX_SERVERS: 687198065894883333
+## WINDOWS_NLA_SERVERS: 687198065894883337
 
-
-if ($FUDOGroup -eq 'MILLECLOUD_PLDEV_SERVERS') {
+if ($FUDOGroup -eq 'WINDOWS_SERVERS') {
 	$safe_id="687198065894883331";	
 	$protocol="rdp";
 	$port=3389;
@@ -46,53 +41,20 @@ if ($FUDOGroup -eq 'MILLECLOUD_PLDEV_SERVERS') {
 	$protocol_security="std";
 }
 
-if ($FUDOGroup -eq 'MILLECLOUD_PL_SERVERS') {
+if ($FUDOGroup -eq 'LINUX_SERVERS') {
 	$safe_id="687198065894883333";	
-	$protocol="rdp";
-	$port=3389;
-	$mylistener="687198065894883343";
-	$protocol_security="std";
-}
-
-if ($FUDOGroup -eq 'MILLECLOUD_SERVERS') {
-	$safe_id="687198065894883336";	
-	$protocol="rdp";
-	$port=3389;
-	$mylistener="687198065894883343";
-	$protocol_security="std";
-}
-
-if ($FUDOGroup -eq 'PL_SERVERS') {
-	$safe_id="687198065894883330";	
-	$protocol="rdp";
-	$port=3389;
-	$mylistener="687198065894883343";
-	$protocol_security="std";
-}
-
-if ($FUDOGroup -eq 'ELIFE_SERVERS') {
-	$safe_id="687198065894883334";	
-	$protocol="rdp";
-	$port=3389;
-	$mylistener="687198065894883343";
-	$protocol_security="std";
-}
-
-if ($FUDOGroup -eq 'STANDALONE_SERVERS') {
-	$safe_id="687198065894883335";	
-	$protocol="rdp";
-	$port=3389;
-	$mylistener="687198065894883339";
-	$protocol_security="nla";
-}
-
-if ($FUDOGroup -eq 'SSH') {
-	$safe_id="687198065894883342";	
 	$protocol="ssh";
 	$port=22;
 	$mylistener="687198065894883355";
 }
 
+if ($FUDOGroup -eq 'STANDALONE_SERVERS') {
+	$safe_id="687198065894883337";	
+	$protocol="rdp";
+	$port=3389;
+	$mylistener="687198065894883339";
+	$protocol_security="nla";
+}
 
 
 #### Start new connection session
@@ -101,11 +63,11 @@ $session_body = @{
    password=$password;
 }
 $json = $session_body | ConvertTo-Json
-$session_id = Invoke-RestMethod -uri "https://10.208.1.205/api/system/login" -Method POST -Body $json -ContentType "application/json"
+$session_id = Invoke-RestMethod -uri "https://192.168.0.33/api/system/login" -Method POST -Body $json -ContentType "application/json"
 
 
 #### Check if server already exist
-$uri = 'https://10.208.1.205/api/system/servers?sessionid=' + $session_id.sessionid
+$uri = 'https://192.168.0.33/api/system/servers?sessionid=' + $session_id.sessionid
 $server_list = Invoke-RestMethod -uri $uri -Method GET -ContentType 'application/json'
 $server = $server_list | where {$_.Name -like '*' + $CompHost + '*'}
 
@@ -142,7 +104,7 @@ else {
 	}	
 
 	$json = $server_body | ConvertTo-Json
-	$uri = 'https://10.208.1.205/api/system/servers?sessionid=' + $session_id.sessionid
+	$uri = 'https://192.168.0.33/api/system/servers?sessionid=' + $session_id.sessionid
 	$server_id = Invoke-RestMethod -uri $uri -Method POST -Body $json -ContentType 'application/json'
 
 	#### Add server account
@@ -158,7 +120,7 @@ else {
 	}
 
 	$json = $server_account_body | ConvertTo-Json
-	$uri = 'https://10.208.1.205/api/system/accounts?sessionid=' + $session_id.sessionid
+	$uri = 'https://192.168.0.33/api/system/accounts?sessionid=' + $session_id.sessionid
 	$account_id = Invoke-RestMethod -uri $uri -Method POST -Body $json -ContentType 'application/json'
 
 	#### Add server & account to safe
@@ -168,7 +130,7 @@ else {
 	}
 
 	$json = $safe_body | ConvertTo-Json
-	$uri = 'https://10.208.1.205/api/system/safes/' + $safe_id + '/account_listeners?sessionid=' + $session_id.sessionid
+	$uri = 'https://192.168.0.33/api/system/safes/' + $safe_id + '/account_listeners?sessionid=' + $session_id.sessionid
 	$safe_add = Invoke-RestMethod -uri $uri -Method POST -Body $json -ContentType 'application/json'
 	$safe_add | fl
 
