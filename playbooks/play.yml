@@ -1,6 +1,5 @@
 ---
 #- hosts: [srv01]
-#- hosts: [dc11]
 - hosts: localhost
   gather_facts: no
 
