@@ -10,5 +10,4 @@
     - IMAGE_extend_memory
     - IMAGE_resize_disk
     - IMAGE_additional_nic
-    - IMAGE_reconfigure_network
     - LNX_create_partition
