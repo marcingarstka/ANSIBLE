@@ -11,4 +11,4 @@ term01          ansible_host=term01.lab.local
 srv01           ansible_host=srv01.lab.local
 
 [linux]
-app01           ansible_host=192.168.0.207
+app01           ansible_host=192.168.0.217

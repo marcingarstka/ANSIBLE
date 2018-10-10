@@ -10,7 +10,7 @@
     validate_certs: no 
     folder: "{{ vdatacenter }}/vm/{{ vfolder }}" 
     datacenter: "{{ vdatacenter }}"
-    #esxi_hostname: "{{ esxhost }}"  
+    esxi_hostname: "{{ esxhost }}"  
     name: "{{ CompHost }}" 
     networks: 
       - name: "{{ vnetwork1 }}" 
@@ -33,7 +33,7 @@
     validate_certs: no 
     folder: "{{ vdatacenter }}/vm/{{ vfolder }}" 
     datacenter: "{{ vdatacenter }}"
-    #esxi_hostname: "{{ esxhost }}"  
+    esxi_hostname: "{{ esxhost }}"  
     name: "{{ CompHost }}" 
     networks: 
       - name: "{{ vnetwork1 }}" 
