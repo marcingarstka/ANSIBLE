@@ -9,5 +9,6 @@
     - IMAGE_extend_cpu
     - IMAGE_extend_memory
     - IMAGE_resize_disk
+    - IMAGE_additional_nic
     - LNX_create_partition
-    - IMAGE_reconfigure_network
+#    - IMAGE_reconfigure_network
