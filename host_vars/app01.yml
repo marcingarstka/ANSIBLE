@@ -24,6 +24,7 @@ vdatacenter: WARSAW
 vfolder: /vm/Linux
 vdescription: "APPLICATION SERVER #1"
 esxhost: esx01.lab.local
+vcenter: vcs01.lab.local
 vtemplate: tempcentos
 vcpu: 1
 vhotaddcpu: yes
@@ -62,12 +63,12 @@ vip1: 192.168.0.207
 vmask1: 255.255.255.0
 vgateway1: 192.168.0.1
 
-#vnetwork2: "VM Network2"
-#iftype2: static
+vnetwork2: "VM Network2"
+iftype2: static
 #iftype2: dhcp
-#vip2: 192.168.0.207
-#vmask2: 255.255.255.0
-#vgateway2: 
+vip2: 192.168.111.207
+vmask2: 255.255.255.0
+vgateway2: 
 
 #### TOTAL NICS
-nicsTotal: 1
+nicsTotal: 2
