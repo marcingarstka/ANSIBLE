@@ -6,6 +6,10 @@
 .\MoveVdisk.ps1 -CompHost SERVER01 -vstore DS_DEV05_APIGW -vdisk "SERVER01.vmdk" -vdiskname2 "Hard disk 2"
 #>
 
+#############################################################
+### REQUIRES POWERCLI INSTALLATION ON THE VCENTER MACHINE ###
+#############################################################
+
 Param(
   [string]$CompHost,
   [string]$vstore,
