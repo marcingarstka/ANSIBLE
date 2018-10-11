@@ -2,6 +2,12 @@
 - name: Include vCenter variables 
   include_vars: ../group_vars/vcenter.yml 
 
+- name: Create ANSIBLE directory
+  win_file:
+    path: c:\ANSIBLE
+    state: directory
+  delegate_to: vcs01
+
 - name: Copy vsphere script file
   win_copy: 
     src: templates/movevdisk.ps1 
