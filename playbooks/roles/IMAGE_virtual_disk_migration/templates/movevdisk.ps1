@@ -22,7 +22,7 @@ Param(
 . "C:\Program Files (x86)\VMware\Infrastructure\vSphere PowerCLI\Scripts\Initialize-PowerCLIEnvironment.ps1"
 
 #Connect to vCenter
-Connect-VIServer -Server vcs01.lab.local -User Creator@vsphere.local -Password xxxxx
+Connect-VIServer -Server vcs01.lab.local -User administrator@vsphere.local -Password P@ssw0rd
 
 #List disks
 $disks = get-harddisk -VM $CompHost
