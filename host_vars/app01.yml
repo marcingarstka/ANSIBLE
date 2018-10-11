@@ -46,7 +46,16 @@ vLogicalVolume2: datalv
 vLogicalVolume2size: 12g
 vLogicalVolume2MountPoint: /data
 MustBeRemoved: no
-
+##### vdiskname2firsttime - required only for new servers with persistent storage
+## true - moves disk to dedicated datastore, 
+## false - skips moving task (default) and keeps inside virtual machine directry
+vdiskname2firsttime: false
+vdiskname2: "Hard disk 2"
+#### vdiskname2attachpersistent - required only if additional disks already exists on persistent datastore
+## true - attaches disk from dedicated datastore
+## false - skips attaching task (default)
+vdiskname2attachpersistent: false
+vdiskfile2: "{{ CompHost }}.vmdk"
 #### TOTAL DISKS
 disksTotal: 2
 
