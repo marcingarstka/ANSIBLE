@@ -18,7 +18,8 @@ Param(
 )
 
 #Import PowerCLI
-. "C:\Program Files (x86)\VMware\Infrastructure\PowerCLI\Scripts\Initialize-PowerCLIEnvironment.ps1" 
+#. "C:\Program Files (x86)\VMware\Infrastructure\PowerCLI\Scripts\Initialize-PowerCLIEnvironment.ps1"
+. "C:\Program Files (x86)\VMware\Infrastructure\vSphere PowerCLI\Scripts\Initialize-PowerCLIEnvironment.ps1"
 
 #Connect to vCenter
 Connect-VIServer -Server vcs01.lab.local -User Creator@vsphere.local -Password xxxxx
