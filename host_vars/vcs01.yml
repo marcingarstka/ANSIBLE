@@ -7,10 +7,3 @@ ansible_connection: winrm
 #ansible_connection: kerberos
 ansible_winrm_server_cert_validation: ignore
 #ansible_winrm_server_cert_validation: true
-
-#### SERVER PARAMETERS
-CompHost: app01
-CompDomain: lab.local
-CompOU:
-os: LINUX
-#os: WINDOWS 
