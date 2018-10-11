@@ -38,7 +38,7 @@ vdatastore1: VM
 
 #### ADDITIONAL DISK PARAMETERS
 vdisk2: 15
-vdatastore2: VM
+vdatastore2: VM2
 vDiskDevice2: sdb
 vDiskDeviceIndex2: 1
 vVolumeGroup2: datavg
