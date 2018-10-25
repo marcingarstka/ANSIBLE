@@ -2,7 +2,7 @@
 - name: Include vCenter variables 
   include_vars: ../group_vars/vcenter.yml 
 
-  - name: Create ANSIBLE directory
+- name: Create ANSIBLE directory
   win_file:
     path: c:\ANSIBLE
     state: directory
