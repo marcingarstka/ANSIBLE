@@ -20,7 +20,7 @@
 - name: Attach virtual disk of {{ CompHost }} from dedicated datastore {{ vdatastore2 }}
   win_shell: c:\ANSIBLE\attachvdisk.ps1 -CompHost {{ CompHost }} -vstore "{{ vdatastore2 }}" -vdisk "{{ vdiskfile2 }}" -vdiskname2 "{{ vdiskname2 }}"
   register: attach_disk_result
-  delegate_to: vcs02
+  delegate_to: vcs01
   when: 
     - vdiskname2attachpersistent == true
     - vdiskname2firsttime == false
