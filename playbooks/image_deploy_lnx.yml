@@ -9,6 +9,7 @@
     - IMAGE_extend_cpu
     - IMAGE_extend_memory
     - IMAGE_virtual_disk_migration
+    - IMAGE_attach_disk_persistent
     - IMAGE_resize_disk
     - IMAGE_additional_nic
     - LNX_create_partition
