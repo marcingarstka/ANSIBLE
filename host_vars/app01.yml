@@ -54,7 +54,7 @@ vdiskname2: "Hard disk 2"
 #### vdiskname2attachpersistent - required only if additional disks already exists on persistent datastore
 ## true - attaches disk from dedicated datastore
 ## false - skips attaching task (default)
-vdiskname2attachpersistent: true
+vdiskname2attachpersistent: false
 vdiskfile2: "{{ CompHost }}_1.vmdk"
 #### TOTAL DISKS
 disksTotal: 2
