@@ -13,3 +13,4 @@
     - IMAGE_resize_disk
     - IMAGE_additional_nic
     - LNX_create_partition
+    - IMAGE_set_disk_persistent
