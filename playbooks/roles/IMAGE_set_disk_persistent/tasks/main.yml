@@ -12,7 +12,7 @@
   win_copy: 
     src: templates/setPersistentMode.ps1 
     dest: c:\ANSIBLE\
-  delegate_to: seplmovcs02
+  delegate_to: vcs01
   when: 
     - vdiskname2firsttime == true
   
@@ -38,7 +38,7 @@
 - name: Set virtual disk of {{ CompHost }} as persistent
   win_shell: c:\ANSIBLE\setPersistentMode.ps1 -CompHost {{ CompHost }} -vdiskname2 "{{ vdiskname2 }}"
   register: set_disk_result
-  delegate_to: seplmovcs02
+  delegate_to: vcs01
   when: 
     - vdiskname2firsttime == true
 
