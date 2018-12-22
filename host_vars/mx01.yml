@@ -10,7 +10,7 @@ ansible_connection: ssh
 
 #### SERVER PARAMETERS
 CompHost: MX01
-CompDomain: lab.local
+CompDomain: mail.local
 
 os: LINUX
 #os: WINDOWS 
