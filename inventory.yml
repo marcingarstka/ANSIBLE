@@ -12,3 +12,4 @@ srv01           ansible_host=srv01.lab.local
 
 [linux]
 app01           ansible_host=192.168.0.207
+mx01            ansible_host=192.168.0.208

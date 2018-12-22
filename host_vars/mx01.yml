@@ -1,0 +1,83 @@
+#### CONNECTION PARAMETERS
+#ansible_port: 5985
+#ansible_port: 5986
+ansible_port: 22
+#ansible_connection: winrm
+ansible_connection: ssh
+#ansible_connection: kerberos
+#ansible_winrm_server_cert_validation: ignore
+#ansible_winrm_server_cert_validation: true
+
+#### SERVER PARAMETERS
+CompHost: MX01
+CompDomain: lab.local
+
+os: LINUX
+#os: WINDOWS 
+
+#vguestos: rhel7_64Guest
+vguestos: centos64Guest
+#vguestos: windows8Server64Guest
+
+#### VM PARAMETERS
+vdatacenter: WARSAW
+vfolder: /vm/Linux
+vdescription: "MAIL SERVER #1"
+esxhost: esx01.lab.local
+vcenter: vcs01.lab.local
+vtemplate: tempcentos
+vcpu: 1
+vhotaddcpu: yes
+vhotremovecpu: yes
+vmemory: 1024
+vhotaddmemory: yes
+
+#### BASE DISK PARAMETERS
+vdisk1: 20
+vdatastore1: VM
+
+#### ADDITIONAL DISK PARAMETERS
+#vdisk2: 15
+#vdatastore2: VM2
+#vDiskDevice2: sdb
+#vDiskDeviceIndex2: 1
+#vVolumeGroup2: datavg
+#vLogicalVolume2: datalv
+#vLogicalVolume2size: 12g
+#vLogicalVolume2MountPoint: /data
+#MustBeRemoved: no
+##### vdiskname2firsttime - required only for new servers with persistent storage
+## true - moves disk to dedicated datastore, 
+## false - skips moving task (default) and keeps inside virtual machine directry
+vdiskname2firsttime: false
+vdiskname2: "Hard disk 2"
+#### vdiskname2attachpersistent - required only if additional disks already exists on persistent datastore
+## true - attaches disk from dedicated datastore
+## false - skips attaching task (default)
+vdiskname2attachpersistent: false
+vdiskfile2: "{{ CompHost }}_1.vmdk"
+#### TOTAL DISKS
+disksTotal: 1
+
+#### DNS ADDRESSING
+vdnsservers:
+- 192.168.0.201
+- 192.168.0.211
+
+#### IP ADDRESSING
+vnetwork1: "VM Network"
+iftype1: static
+#iftype1: dhcp
+vip1: 192.168.0.208
+vmask1: 255.255.255.0
+vgateway1: 192.168.0.1
+
+#vnetwork2: "VM Network2"
+#iftype2: static
+#iftype2: dhcp
+#vip2: 192.168.111.207
+#vmask2: 255.255.255.0
+#vgateway2: 
+
+#### TOTAL NICS
+nicsTotal: 1
